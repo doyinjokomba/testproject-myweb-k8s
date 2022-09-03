@@ -1,0 +1,18 @@
+---
+
+- name: Deploy to K8s
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Deploy postgresSQL database Network Service
+    shell: |
+      kubectl apply -f webapp/accountingapp/k8s/accounting-db.service.yml
+  
+  - name: Deploy postgresSQL database Deployment
+    shell: | 
+      kubectl apply -f webapp/accountingapp/k8s/accounting-db.deploymet.yml
+    
+  - name: Deploy service and deployment for web
+    shell: |
+      kubectl apply -f webapp/accountingapp/k8s/accounting-web.yml
